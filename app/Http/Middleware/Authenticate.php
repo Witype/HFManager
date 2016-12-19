@@ -2,22 +2,24 @@
 
 namespace App\Http\Middleware;
 
+use App\Exceptions\CommonException;
 use Closure;
 use Session;
+use Auth;
 
 class Authenticate
 {
     /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string|null  $guard
+     * @param $request
+     * @param Closure $next
      * @return mixed
+     * @throws CommonException
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle($request, Closure $next)
     {
-        if (Session::has('user_id')) return 'login';
+        if (Auth::guest()) {
+            throw new CommonException(trans('constant.COMMON_UN_LOGIN'));
+        }
         return $next($request);
     }
 }

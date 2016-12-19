@@ -14,9 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app['validator'] -> resolver(function ($translator, $data, $rules, $messages){
-            return new Validator($translator, $data, $rules, $messages);
-        });
+        //
     }
 
     /**

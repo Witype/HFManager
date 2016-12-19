@@ -11,10 +11,13 @@
 |
 */
 
-Route::group(['prefix' => 'Terminal','middleware' => 'web','namespace' => 'Terminal'], function () {
-    Route::get('login', 'UserController@login');
-    Route::get('register', 'UserController@register');
-    Route::get('desc', 'UserController@desc');
+Route::group(['prefix' => 'terminal','middleware' => 'web','namespace' => 'Terminal'], function () {
+    Route::get('login', 'AuthController@login');
+    Route::get('register', 'AuthController@register');
+    Route::get('desc', 'AuthController@desc');
+    Route::get('logout', 'AuthController@logout');
+    Route::get('reset', 'UserController@reset');
+    Route::get('change', 'UserController@change');
 });
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Exceptions\APIException;
 use Exception;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -45,6 +46,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        if ($e instanceof APIException) {
+            return $e -> __toString();
+        }
         return parent::render($request, $e);
     }
 }

@@ -30,8 +30,9 @@ class Register implements RegisterContract
     public function create(array $data)
     {
         return UserModel::create([
-            'name' => $data['nickname'],
+            'nickname' => $data['nickname'],
             'email' => $data['email'],
+            'created_at' => time(),
             'password' => bcrypt($data['password']),
         ]);
     }

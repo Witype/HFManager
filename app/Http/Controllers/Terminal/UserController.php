@@ -1,32 +1,31 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Typer_work
+ * Date: 2016/12/19
+ * Time: 16:17
+ */
 
 namespace App\Http\Controllers\Terminal;
 
-use App\Http\Controllers\ApiException;
+
 use App\Http\Controllers\Controller;
-use App\Services\Register;
+use App\Http\Controllers\Model\UserModel;
 use Illuminate\Contracts\Auth\Guard;
-use Session;
-use Auth;
 
 class UserController extends Controller
 {
 
-    use AuthAndRegisterUser;
+    use UserModel;
 
     /**
      * UserController constructor.
-     * @param Register $service
      * @param Guard $guard
      */
-    public function __construct(Register $service,Guard $guard)
+    public function __construct(Guard $guard)
     {
-        $this->register=$service;
-        $this->auth=$guard;
-    }
-
-    public function desc() {
-        var_dump(Auth::check());
+        $this->middleware('auth');
+        $this->auth = $guard;
     }
 
 }
